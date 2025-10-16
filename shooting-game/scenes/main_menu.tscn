@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs1ljwp7vkumr"]
+
+[ext_resource type="Script" uid="uid://q8lykr6p7328" path="res://main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://bgy5c6leih22g" path="res://Assets/ZOmbie blaster.png" id="2_ekxnf"]
+
+[node name="main menu" type="Node2D"]
+script = ExtResource("1_l6cm7")
+
+[node name="button Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="button Manager"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = 287.0
+offset_right = 977.0
+offset_bottom = 378.0
+theme_override_font_sizes/font_size = 60
+text = "START"
+
+[node name="Button2" type="Button" parent="button Manager"]
+visible = false
+layout_mode = 0
+offset_left = 373.0
+offset_top = 313.0
+offset_right = 798.0
+offset_bottom = 401.0
+text = "OPTIONS"
+
+[node name="Button3" type="Button" parent="button Manager"]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 441.0
+offset_right = 959.0
+offset_bottom = 532.0
+theme_override_font_sizes/font_size = 60
+text = "QUIT"
+
+[node name="ZOmbieBlaster" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(581, 327)
+scale = Vector2(0.764974, 0.650391)
+texture = ExtResource("2_ekxnf")
+
+[connection signal="pressed" from="button Manager/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="button Manager/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="button Manager/Button3" to="." method="_on_button_3_pressed"]

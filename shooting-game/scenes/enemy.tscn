@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cohr83ms25qlg"]
+
+[ext_resource type="Script" uid="uid://by74ruhsnvf5h" path="res://scenes/enemy.gd" id="1_c4w8v"]
+[ext_resource type="Texture2D" uid="uid://dgbev55i02wrk" path="res://Assets/skeleton-attack_0.png" id="2_xwavj"]
+[ext_resource type="Texture2D" uid="uid://c376dn7p154ku" path="res://Assets/Deceased_Figure_with_Bloodstains-removebg-preview.png" id="3_c4w8v"]
+[ext_resource type="Texture2D" uid="uid://dmhxdiuqm8avs" path="res://Assets/NicePng_blood-drop-png_240671.png" id="4_md484"]
+[ext_resource type="AudioStream" uid="uid://bcsi5x35j2s11" path="res://Assets/monster_die.wav" id="5_ipns3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qclf"]
+radius = 11.3915
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_c4w8v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(5.04589, 2.04162)
+shape = SubResource("CircleShape2D_8qclf")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Alive" type="Sprite2D" parent="Graphics"]
+position = Vector2(-15.2383, -49.6685)
+rotation = -1.57888
+texture = ExtResource("2_xwavj")
+
+[node name="Dead" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(13, -22)
+scale = Vector2(0.485, 0.542)
+texture = ExtResource("3_c4w8v")
+
+[node name="blood" type="Sprite2D" parent="Graphics/Dead"]
+show_behind_parent = true
+position = Vector2(-46, 80)
+texture = ExtResource("4_md484")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -70)
+collision_mask = 3
+
+[node name="Deathsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ipns3")
+bus = &"Sound effects"

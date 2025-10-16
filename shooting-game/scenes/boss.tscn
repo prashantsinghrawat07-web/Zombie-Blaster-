@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://txrr8dd4t311"]
+
+[ext_resource type="Script" uid="uid://cjo1tinw2wirt" path="res://scenes/boss.gd" id="1_r3bxh"]
+[ext_resource type="Texture2D" uid="uid://bwi6pot4b5wfp" path="res://Assets/zombie_boss-removebg.png" id="2_wqpjq"]
+[ext_resource type="Texture2D" uid="uid://djsj2y8f7scac" path="res://Assets/boss_death.png" id="3_r3bxh"]
+[ext_resource type="Texture2D" uid="uid://dmhxdiuqm8avs" path="res://Assets/NicePng_blood-drop-png_240671.png" id="4_qsl3t"]
+[ext_resource type="AudioStream" uid="uid://bcsi5x35j2s11" path="res://Assets/monster_die.wav" id="5_2avx2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qclf"]
+radius = 11.3915
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3bxh"]
+bg_color = Color(0.185383, 0.185383, 0.185383, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqpjq"]
+bg_color = Color(0.827451, 0, 0.027451, 1)
+
+[node name="Boss" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_r3bxh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(5.04589, 2.04162)
+shape = SubResource("CircleShape2D_8qclf")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Alive" type="Sprite2D" parent="Graphics"]
+position = Vector2(2, -4)
+rotation = -3.142
+scale = Vector2(0.524177, 0.567805)
+texture = ExtResource("2_wqpjq")
+
+[node name="Dead" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(13, -22)
+scale = Vector2(0.485, 0.542)
+texture = ExtResource("3_r3bxh")
+
+[node name="blood" type="Sprite2D" parent="Graphics/Dead"]
+show_behind_parent = true
+position = Vector2(-47.4227, 86.7159)
+texture = ExtResource("4_qsl3t")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -70)
+collision_mask = 3
+
+[node name="Deathsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2avx2")
+bus = &"Sound effects"
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -45.0
+offset_top = 112.0
+offset_right = 64.0
+offset_bottom = 137.0
+theme_override_styles/background = SubResource("StyleBoxFlat_r3bxh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wqpjq")
+max_value = 10.0
+value = 5.0
